@@ -1,0 +1,38 @@
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return ""; // 如果数组为空，直接返回空字符串
+        }
+
+        // 初始化结果字符串为第一个字符串
+        String prefix = strs[0];
+
+        // 遍历数组中的其他字符串
+        for (int i = 1; i < strs.length; i++) {
+            // 临时存储当前字符串的公共前缀
+            StringBuilder temp = new StringBuilder();
+
+            // 遍历当前字符串和前缀字符串的每个字符
+            for (int j = 0; j < Math.min(prefix.length(), strs[i].length()); j++) {
+                char c = prefix.charAt(j);
+                char cNext = strs[i].charAt(j);
+
+                if (c == cNext) {
+                    temp.append(c); // 如果字符相同，追加到临时前缀
+                } else {
+                    break; // 如果字符不同，跳出循环
+                }
+            }
+
+            // 更新公共前缀
+            prefix = temp.toString();
+
+            // 如果公共前缀为空，直接返回
+            if (prefix.isEmpty()) {
+                return "";
+            }
+        }
+
+        return prefix; // 返回最终的公共前缀
+    }
+}
